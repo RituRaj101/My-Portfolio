@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  ============================================================
+  Rituraj Kumar — Java Full Stack Developer Portfolio
+  ============================================================
+  File     : index.html
+  Purpose  : Main HTML structure (markup only, no inline styles)
+  CSS      : styles.css
+  JS       : script.js
+
+  To run   : Open with VS Code Live Server
+             (Right-click index.html → "Open with Live Server")
+  ============================================================
+-->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ritu Raj — Java Full Stack Developer</title>
+  <!-- Add this in your <head> -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init("2frv2yU7iS-TceYBj"); // 🔁 Replace with your Public Key
+  </script>
+
+  <!-- Bootstrap 5 — for responsive grid and utility classes -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome — icons used throughout the page -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts — Poppins (main), Fira Code (code labels) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <!-- Custom stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- ============================================================
+       NAVBAR
+       Fixed top bar with logo, navigation links, and Resume button.
+       Becomes opaque on scroll (handled in script.js).
+  ============================================================ -->
+  <nav id="navbar">
+    <div class="container d-flex align-items-center justify-content-between">
+      <!-- Logo / Brand -->
+      <a href="#home" class="nav-brand">Ritu Raj<span>.</span></a>
+
+      <!-- Desktop navigation links (hidden on mobile) -->
+      <div class="desktop-nav d-flex align-items-center gap-2">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#education" class="nav-link">Education</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="./updatedMy_Resume.pdf" download class="btn-resume ms-2">Resume ↗</a>
+      </div>
+
+      <!-- Hamburger button (visible on mobile only) -->
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile slide-down menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="closeMenu()">Home</a>
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#skills" onclick="closeMenu()">Skills</a>
+    <a href="#projects" onclick="closeMenu()">Projects</a>
+    <a href="#experience" onclick="closeMenu()">Experience</a>
+    <a href="#education" onclick="closeMenu()">Education</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+    <a href="#" onclick="closeMenu()">Resume ↗</a>
+  </div>
+
+  <!-- ============================================================
+       HERO SECTION
+       First section the visitor sees. Name, role, tagline, CTA buttons.
+  ============================================================ -->
+  <section id="home">
+    <!-- Background glow (decorative, positioned in CSS) -->
+    <div class="hero-glow" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="row align-items-center gy-5">
+        <!-- Left: Text content -->
+        <div class="col-lg-7">
+          <!-- Availability badge -->
+          <div class="hero-badge">
+            <span class="badge-dot" aria-hidden="true"></span>
+            Open to opportunities
+          </div>
+
+          <!-- Name -->
+          <h1 class="hero-name">Rituraj<br />Kumar</h1>
+
+          <!-- Role with gradient highlight -->
+          <h2 class="hero-role">
+            Java <span class="gradient-text">Full Stack</span> Developer
+          </h2>
+
+          <!-- Short pitch -->
+          <p class="hero-tagline">
+            Skilled full-stack developer with expertise in Java, Spring Boot,
+            and backend development. Proficient in building RESTful APIs and
+            responsive frontends using HTML, CSS, JavaScript, and React.js.
+            Working knowledge of SQL and Oracle with a focus on clean coding
+            practices. Focused on developing scalable, maintainable, and
+            production-ready applications
+          </p>
+
+          <!-- Call-to-action buttons -->
+          <div class="d-flex flex-wrap gap-3 mb-4">
+            <a href="#projects" class="btn-primary-custom">View Projects →</a>
+            <a href="./updatedMy_Resume.pdf" download class="btn-ghost-custom">Download Resume</a>
+          </div>
+
+          <!-- Social icon links -->
+          <div class="d-flex gap-2">
+            <a href="https://github.com/RituRaj101" target="_blank" class="social-icon" title="GitHub"
+              aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/ritu-raj-029679220/" class="social-icon" title="LinkedIn" target="_blank
+                aria-label=" LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:kr.rituraj2002@gmail.com" class="social-icon" title="Email" aria-label="Email"><i
+                class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+
+        <!-- Right: Avatar placeholder -->
+        <div class="col-lg-5 text-center">
+          <div class="hero-avatar"style="overflow: auto;" aria-label="Profile avatar">
+
+            <img src="./linkedin photo ritu.png" alt="ritu photo" height="100%" width="100%">
+
+          </div>
+          <!-- <p class="avatar-caption">// fuelled by coffee &amp; curiosity</p> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================================================
+       ABOUT SECTION
+       Brief bio, stat boxes, and quick info pills.
+  ============================================================ -->
+  <section id="about" class="section-pad">
+    <div class="container">
+      <div class="row gy-4 align-items-start">
+        <!-- Left: Bio text -->
+        <div class="col-lg-5 fade-in">
+          <div class="section-tag">About Me</div>
+          <h2 class="section-title">
+            Backend-strong.<br />Full Stack learning.
+          </h2>
+
+          <p class="body-text mt-3">
+            BTech Computer Science graduate with hands-on project experience
+            building full-stack applications using Java, Spring Boot, and SQL
+            databases. My primary strength is backend development — REST API
+            design, layered architecture, and clean code.
+          </p>
+          <p class="body-text mt-3">
+            I'm actively growing my frontend skills in React.js and take pride
+            in writing code that is understandable, maintainable, and
+            well-structured.
+          </p>
+        </div>
+
+        <!-- Right: Stats + Quick Info -->
+        <div class="col-lg-7 fade-in delay-1">
+          <!-- Stat boxes -->
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <div class="stat-box">
+                <div class="stat-num">200+</div>
+                <div class="stat-label">DSA Problems Solved</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="stat-box">
+                <div class="stat-num">8.05</div>
+                <div class="stat-label">CGPA — BTech CSE</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="stat-box">
+                <div class="stat-num">3+</div>
+                <div class="stat-label">Projects Built</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="stat-box">
+                <div class="stat-num">2</div>
+                <div class="stat-label">Certifications</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick info card -->
+          <div class="card-base">
+            <div class="code-label mb-3">// quick_info</div>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="info-pill"><i class="fas fa-map-marker-alt"></i> Bhopal, India</span>
+              <span class="info-pill"><i class="fas fa-graduation-cap"></i> BTech CSE</span>
+              <span class="info-pill"><i class="fas fa-envelope"></i>
+                kr.rituraj2002@gmail.com</span>
+              <span class="info-pill"><i class="fas fa-phone"></i> +91 7061875704</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================================================
+       SKILLS SECTION
+       Grouped skill pills with honest level labels.
+       Backend = "Solid", Frontend = "Intermediate".
+  ============================================================ -->
+  <section id="skills" class="section-pad">
+    <div class="container">
+      <div class="text-center mb-5 fade-in">
+        <div class="section-tag justify-content-center">Technical Skills</div>
+        <h2 class="section-title">What I Work With</h2>
+        <p class="body-text" style="max-width: 480px; margin: 0.5rem auto 0">
+          Backend Java development is my core strength. Frontend is an area
+          I'm actively building.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Languages & Database -->
+        <div class="col-lg-6 fade-in delay-1">
+          <div class="card-base h-100">
+            <div class="skill-card-header">
+              <span class="skill-card-title">Core Languages</span>
+              <!-- <span class="level-badge solid">Solid</span> -->
+            </div>
+            <div class="skill-group">
+              <div class="skill-group-label">Languages</div>
+              <span class="pill"><i class="fab fa-java"></i> Java</span>
+              <span class="pill"><i class="fab fa-js-square"></i> JavaScript</span>
+            </div>
+            <div class="skill-group">
+              <div class="skill-group-label">Database</div>
+              <span class="pill"><i class="fas fa-database"></i> Oracle</span>
+              <span class="pill"><i class="fas fa-database"></i> MySQL</span>
+              <span class="pill"><i class="fas fa-table"></i> SQL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="col-lg-6 fade-in delay-2">
+          <div class="card-base h-100">
+            <div class="skill-card-header">
+              <span class="skill-card-title">Backend</span>
+              <!-- <span class="level-badge solid">Solid</span> -->
+            </div>
+            <div class="skill-group">
+              <div class="skill-group-label">Frameworks &amp; APIs</div>
+              <span class="pill"><i class="fas fa-leaf"></i> Spring</span>
+              <span class="pill"><i class="fas fa-bolt"></i> Spring Boot</span>
+              <span class="pill"><i class="fas fa-plug"></i> REST APIs</span>
+              <span class="pill"><i class="fas fa-layer-group"></i> Spring MVC</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frontend -->
+        <div class="col-lg-6 fade-in delay-1">
+          <div class="card-base h-100">
+            <div class="skill-card-header">
+              <span class="skill-card-title">Frontend</span>
+              <!-- <span class="level-badge growing">Intermediate</span> -->
+            </div>
+            <div class="skill-group">
+              <div class="skill-group-label">Technologies</div>
+              <span class="pill"><i class="fab fa-html5"></i> HTML5</span>
+              <span class="pill"><i class="fab fa-css3-alt"></i> CSS3</span>
+              <span class="pill"><i class="fab fa-bootstrap"></i> Bootstrap</span>
+              <span class="pill"><i class="fab fa-react"></i> React.js</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Concepts -->
+        <div class="col-lg-6 fade-in delay-2">
+          <div class="card-base h-100">
+            <div class="skill-card-header">
+              <span class="skill-card-title">Concepts &amp; Architecture</span>
+              <!-- <span class="level-badge applied">Applied</span> -->
+            </div>
+            <div class="skill-group">
+              <div class="skill-group-label">Patterns &amp; Practices</div>
+              <span class="pill"><i class="fas fa-cubes"></i> OOP</span>
+              <span class="pill"><i class="fas fa-sitemap"></i> MVC</span>
+              <span class="pill"><i class="fas fa-shield-alt"></i> Error Handling</span>
+              <span class="pill"><i class="fas fa-check-circle"></i> Validation</span>
+              <span class="pill"><i class="fas fa-code-branch"></i> CRUD</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================================================
+       TOOLS SECTION
+       Icon grid of dev tools used.
+  ============================================================ -->
+  <section id="tools" class="section-pad">
+    <div class="container">
+      <div class="text-center mb-5 fade-in">
+        <div class="section-tag justify-content-center">
+          Tools &amp; Ecosystem
+        </div>
+        <h2 class="section-title">My Toolkit</h2>
+      </div>
+
+      <div class="row g-3 justify-content-center">
+        <div class="col-6 col-md-3 col-lg-2 fade-in delay-1">
+          <div class="tool-chip">
+            <i class="fab fa-git-alt" style="color: #f05032"></i>
+            <span>Git</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 fade-in delay-1">
+          <div class="tool-chip">
+            <i class="fab fa-github"></i>
+            <span>GitHub</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 fade-in delay-2">
+          <div class="tool-chip">
+            <i class="fas fa-paper-plane" style="color: #ef5b25"></i>
+            <span>Postman</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 fade-in delay-2">
+          <div class="tool-chip">
+            <i class="fab fa-aws" style="color: #ff9900"></i>
+            <span>AWS Basics</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 fade-in delay-3">
+          <div class="tool-chip">
+            <i class="fas fa-circle" style="color: #7b5ea7"></i>
+            <span>Eclipse</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 fade-in delay-3">
+          <div class="tool-chip">
+            <i class="fas fa-code" style="color: #007acc"></i>
+            <span>VS Code</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 fade-in delay-3">
+          <div class="tool-chip">
+            <i class="fab fa-npm" style="color: #cb3837"></i>
+            <span>NPM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================================================
+       PROJECTS SECTION
+       3 project cards with tech tags and demo/GitHub links.
+  ============================================================ -->
+  <section id="projects" class="section-pad">
+    <div class="container">
+      <div class="text-center mb-5 fade-in">
+        <div class="section-tag justify-content-center">Selected Work</div>
+        <h2 class="section-title">Projects</h2>
+      </div>
+
+      <div class="row g-4">
+        <!-- Project 1 -->
+        <div class="col-lg-4 col-md-6 fade-in delay-1">
+          <div class="proj-card">
+            <div class="proj-num">01</div>
+            <h3 class="proj-title">Food Delivery API</h3>
+            <p class="proj-desc">
+             • Developed a scalable REST API for food delivery operations including users, restaurants, menus, and orders. <br>
+• Designed layered architecture with optimized entity relationships and modular service components. <br>
+• Implemented order lifecycle workflow with status transitions from PLACED to DELIVERED.
+            </p>
+            <div class="proj-tags">
+              <span class="tag">Java</span>
+              <span class="tag">Spring Boot</span>
+              <span class="tag">Spring Data JPA</span>
+              <span class="tag">REST API</span>
+              <span class="tag"> Oracle</span>
+              <span class="tag"> Maven</span>
+            </div>
+            <div class="proj-actions">
+              <!-- <a href="#" class="btn-proj-primary" onclick="return false;"><i class="fas fa-external-link-alt"></i>
+                Demo</a> -->
+              <a href="https://github.com/RituRaj101/Food-Delivery-API-" class="btn-proj-ghost" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="col-lg-4 col-md-6 fade-in delay-2">
+          <div class="proj-card">
+            <div class="proj-num">02</div>
+            <h3 class="proj-title">Cab Booking Application</h3>
+            <p class="proj-desc">
+             • Built a cab booking platform supporting ride booking, driver allocation, trip tracking, and completion. <br>
+• Applied Strategy Design Pattern for dynamic driver matching and ride allocation logic. <br>
+• Implemented pessimistic locking and layered architecture for concurrent transaction management.
+            </p>
+            <div class="proj-tags">
+              <span class="tag">Java</span>
+              <span class="tag">Spring Boot</span>
+              <span class="tag">Spring REST API</span>
+              <span class="tag">Spring Data JPA, Hibernate</span>
+              <span class="tag">Oracle DB</span>
+            </div>
+            <div class="proj-actions">
+              <a href="#" class="btn-proj-primary" onclick="return false;"><i class="fas fa-external-link-alt"></i>
+                Demo</a>
+              <a href="#" class="btn-proj-ghost" onclick="return false;"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="col-lg-4 col-md-6 fade-in delay-3">
+          <div class="proj-card">
+            <div class="proj-num">03</div>
+            <h3 class="proj-title">To-Do Web Application</h3>
+            <p class="proj-desc">
+              Task manager with real-time DOM manipulation, local persistence,
+              and a responsive UI — built with vanilla JS and no frameworks.
+            </p>
+            <div class="proj-tags">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">DOM API</span>
+            </div>
+            <div class="proj-actions">
+              <a href="#" class="btn-proj-primary" onclick="return false;"><i class="fas fa-external-link-alt"></i>
+                Demo</a>
+              <a href="#" class="btn-proj-ghost" onclick="return false;"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================================================
+       EXPERIENCE SECTION
+       Self-directed project experience with a left accent bar.
+  ============================================================ -->
+  <section id="experience" class="section-pad">
+    <div class="container">
+      <div class="row gy-4 align-items-start">
+        <!-- Left: Label + Title -->
+        <div class="col-lg-4 fade-in">
+          <div class="section-tag">Work History</div>
+          <h2 class="section-title">Experience</h2>
+          <p class="body-text mt-3">
+            Hands-on, self-directed project experience applying real-world
+            software development practices.
+          </p>
+        </div>
+
+        <!-- Right: Experience card -->
+        <div class="col-lg-8 fade-in delay-2">
+          <div class="exp-card">
+            <!-- Date badge -->
+            <div class="exp-badge">Jan 2025 — Present</div>
+
+            <h3 class="exp-title">Self-Directed Full Stack Development</h3>
+            <p class="body-text mb-3">
+              Actively building and refining full-stack projects using Java,
+              Spring Boot, and Oracle to grow practical skills alongside
+              academic knowledge.
+            </p>
+
+            <!-- Achievement list -->
+            <ul class="exp-list">
+              <li>
+                Designed and built full-stack apps using Java, Spring Boot,
+                and Oracle
+              </li>
+              <li>
+                Developed RESTful APIs following industry-standard design and
+                best practices
+              </li>
+              <li>
+                Implemented CRUD operations with validation, error handling,
+                and layered architecture
+              </li>
+              <li>
+                Applied MVC and Controller → Service → Repository
+                architectural patterns
+              </li>
+              <li>
+                Collaborated on version-controlled projects using Git and
+                GitHub workflows
+              </li>
+              <li>
+                Built responsive UIs using React.js, Bootstrap, and vanilla
+                JavaScript
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================================================
+       EDUCATION SECTION
+       Degree card, achievements, certifications.
+  ============================================================ -->
+  <section id="education" class="section-pad">
+    <div class="container">
+      <div class="text-center mb-5 fade-in">
+        <div class="section-tag justify-content-center">
+          Academic Background
+        </div>
+        <h2 class="section-title">Education</h2>
+      </div>
+
+      <!-- Degree -->
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 fade-in delay-1">
+          <div class="edu-card">
+            <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div>
+              <div class="edu-degree">
+                Bachelor of Technology — Computer Science Engineering
+              </div>
+              <div class="edu-inst">
+                Oriental Institute of Science and Technology, Bhopal
+              </div>
+              <div class="edu-cgpa">CGPA: 8.05 / 10.0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Achievements -->
+      <div class="text-center mb-4 fade-in">
+        <div class="section-tag justify-content-center">Achievements</div>
+      </div>
+      <div class="row g-4 justify-content-center mb-5">
+        <div class="col-lg-4 col-md-6 fade-in delay-1">
+          <div class="ach-card">
+            <div class="ach-icon"><i class="fas fa-trophy"></i></div>
+            <div class="ach-title">200+ DSA Problems</div>
+            <div class="ach-sub">
+              Solved across CodeChef, HackerRank &amp; GeeksforGeeks
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 fade-in delay-2">
+          <div class="ach-card">
+            <div class="ach-icon"><i class="fas fa-code"></i></div>
+            <div class="ach-title">Multi-Platform Coder</div>
+            <div class="ach-sub">
+              Active on CodeChef, HackerRank, GeeksforGeeks
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certifications -->
+      <div class="text-center mb-4 fade-in">
+        <div class="section-tag justify-content-center">Certifications</div>
+      </div>
+      <div class="row g-3 justify-content-center">
+        <div class="col-lg-5 col-md-6 fade-in delay-1">
+          <div class="cert-card">
+            <div class="cert-icon"><i class="fab fa-java"></i></div>
+            <div>
+              <div class="cert-title">Java Programming Certification</div>
+              <div class="cert-sub">Core Java &amp; OOP Fundamentals</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-6 fade-in delay-2">
+          <div class="cert-card">
+            <div class="cert-icon" style="
+                  background: rgba(167, 139, 250, 0.1);
+                  border-color: rgba(167, 139, 250, 0.2);
+                  color: var(--accent2);
+                ">
+              <i class="fas fa-globe"></i>
+            </div>
+            <div>
+              <div class="cert-title">Web Development Certification</div>
+              <div class="cert-sub">
+                HTML, CSS, JavaScript &amp; Frameworks
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ============================================================
+       CONTACT SECTION
+       Contact info on left, message form on right.
+       Form submit handled in script.js.
+  ============================================================ -->
+  <section id="contact" class="section-pad contact-section">
+    <div class="container">
+      <div class="text-center mb-5 fade-in">
+        <div class="section-tag justify-content-center">Get In Touch</div>
+        <h2 class="section-title">
+          Let's Build Something<br />Great Together.
+        </h2>
+      </div>
+
+      <div class="row g-4">
+        <!-- Contact Info card -->
+        <div class="col-lg-5 fade-in delay-1">
+          <div class="card-base h-100">
+            <div class="code-label mb-4">// contact_info</div>
+            <div class="con-row">
+              <div class="con-icon"><i class="fas fa-phone"></i></div>
+              <div>
+                <div class="con-label">Phone</div>
+                <div class="con-value">+91 7061875704</div>
+              </div>
+            </div>
+            <div class="con-row">
+              <div class="con-icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <div class="con-label">Email</div>
+                <div class="con-value">kr.rituraj2002@gmail.com</div>
+              </div>
+            </div>
+            <div class="con-row">
+              <div class="con-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div>
+                <div class="con-label">Location</div>
+                <div class="con-value">Bhopal, India</div>
+              </div>
+            </div>
+            <!-- Social icons repeated for contact card -->
+            <div class="d-flex gap-2 mt-4">
+              <a href="https://github.com/RituRaj101" target="_blank" class="social-icon" aria-label="GitHub"><i
+                  class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/ritu-raj-029679220/" target="_blank" class="social-icon"
+                aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Message form card -->
+        <div class="col-lg-7 fade-in delay-2">
+          <div class="card-base">
+            <div class="code-label mb-4">// send_message</div>
+            <form action="https://formspree.io/f/mnjlylvz" method="post">
+
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <input type="text" id="senderName" class="form-ctrl" placeholder="Your Name" />
+                </div>
+                <div class="col-md-6">
+                  <input type="email" id="senderEmail" class="form-ctrl" placeholder="Your Email" />
+                </div>
+                <div class="col-12">
+                  <textarea id="senderMsg" class="form-ctrl" rows="5" placeholder="Your Message..."></textarea>
+                </div>
+                <div class="col-12">
+                  <!-- onclick calls handleSubmit() in script.js -->
+                  <button type="submit" class="btn-primary-custom w-100" onclick="handleSubmit(this)">
+                    Send Message →
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="container text-center">
+      <p>
+        Built by <span class="footer-name">Ritu Raj</span> · Java Full
+        Stack Developer
+      </p>
+      <p class="footer-copy">© 2026 All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scroll-to-top button (visibility toggled in script.js) -->
+  <button id="scrollTopBtn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Custom JavaScript (loaded last so DOM is ready) -->
+  <script src="script.js"></script>
+</body>
+
+</html>

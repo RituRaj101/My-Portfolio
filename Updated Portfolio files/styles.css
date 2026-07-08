@@ -1,0 +1,1087 @@
+/*
+  ============================================================
+  Rituraj Kumar — Portfolio Stylesheet
+  ============================================================
+  File    : styles.css
+  Fonts   : Poppins (body/headings), Fira Code (labels/code)
+  Theme   : Dark — navy background with blue accent
+  Layout  : Mobile-first, Bootstrap grid for columns
+
+  Animation policy:
+    Only simple hover transitions (color, border-color,
+    background, box-shadow). No keyframes, no transforms,
+    no scroll-triggered fade-ins.
+  ============================================================
+*/
+
+
+/* ============================================================
+   1. CSS CUSTOM PROPERTIES (design tokens)
+============================================================ */
+:root {
+  /* Background layers */
+  --bg:        #0a0f1a;
+  --surface:   #131c2e;
+  --surface2:  #1a2540;
+
+  /* Borders */
+  --border:    rgba(100, 160, 255, 0.12);
+  --border-hi: rgba(100, 160, 255, 0.30);
+
+  /* Accent colors */
+  --accent:      #4f9eff;
+  --accent2:     #a78bfa;
+  --accent3:     #fbbf24;
+  --accent-glow: rgba(79, 158, 255, 0.10);
+  --green:       #34d399;
+
+  /* Text */
+  --text:     #edf0f8;
+  --text-sub: #b0bed8;
+  --muted:    #6b80a8;
+  --white:    #ffffff;
+
+  /* Typography */
+  --font-main: 'Poppins', sans-serif;
+  --font-code: 'Fira Code', monospace;
+
+  /* Spacing */
+  --section-padding: 6rem 0;
+}
+
+
+/* ============================================================
+   2. RESET & BASE
+============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-main);
+  font-size: 17px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Subtle dot-grid background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(79, 158, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 158, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+section, nav, footer {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ============================================================
+   3. TYPOGRAPHY HELPERS
+============================================================ */
+
+.section-tag {
+  font-family: var(--font-code);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.section-tag::before {
+  content: '';
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  letter-spacing: -0.5px;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 0.8rem;
+}
+
+.body-text {
+  color: var(--text-sub);
+  font-size: 1rem;
+  line-height: 1.85;
+  font-weight: 400;
+}
+
+.code-label {
+  font-family: var(--font-code);
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.gradient-text {
+  background: linear-gradient(120deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
+.section-pad {
+  padding: var(--section-padding);
+}
+
+.section-divider {
+  height: 1px;
+  background: var(--border);
+}
+
+
+/* ============================================================
+   4. BUTTONS
+============================================================ */
+
+.btn-primary-custom {
+  display: inline-block;
+  background: var(--accent);
+  color: #000 !important;
+  text-decoration: none;
+  padding: 0.9rem 2rem;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-primary-custom:hover {
+  background: #6fafff;
+}
+
+.btn-ghost-custom {
+  display: inline-block;
+  background: transparent;
+  color: var(--text) !important;
+  text-decoration: none;
+  padding: 0.9rem 2rem;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1.5px solid var(--border-hi);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.btn-ghost-custom:hover {
+  border-color: var(--accent);
+  color: var(--accent) !important;
+  background: var(--accent-glow);
+}
+
+
+/* ============================================================
+   5. CARDS — base style
+============================================================ */
+.card-base {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.8rem;
+  transition: border-color 0.2s;
+}
+
+.card-base:hover {
+  border-color: var(--border-hi);
+}
+
+
+/* ============================================================
+   6. NAVBAR
+============================================================ */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1.1rem 0;
+  transition: background 0.3s, padding 0.3s;
+}
+
+#navbar.scrolled {
+  background: rgba(10, 15, 26, 0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.65rem 0;
+}
+
+.nav-brand {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--white) !important;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.nav-brand span {
+  color: var(--accent);
+}
+
+.nav-link {
+  color: var(--text-sub) !important;
+  font-size: 0.8rem;
+  font-family: var(--font-code);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.35rem 0.65rem;
+  border-radius: 5px;
+  transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent) !important;
+}
+
+.btn-resume {
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  color: var(--accent) !important;
+  font-size: 0.78rem;
+  font-family: var(--font-code);
+  padding: 0.4rem 1.1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-resume:hover {
+  background: var(--accent);
+  color: #000 !important;
+}
+
+.hamburger {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: none;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 58px;
+  left: 0;
+  right: 0;
+  background: rgba(10, 15, 26, 0.98);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 1.2rem 1.5rem;
+  z-index: 999;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.mobile-menu.open {
+  display: flex;
+}
+
+.mobile-menu a {
+  color: var(--text-sub);
+  text-decoration: none;
+  font-family: var(--font-code);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s;
+}
+
+.mobile-menu a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 991px) {
+  .hamburger   { display: block; }
+  .desktop-nav { display: none !important; }
+}
+
+
+/* ============================================================
+   7. HERO SECTION
+============================================================ */
+#home {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 90px;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(79, 158, 255, 0.07) 0%, transparent 65%);
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Availability badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-code);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: var(--green);
+  text-transform: uppercase;
+  margin-bottom: 1.3rem;
+}
+
+/* Static green dot — no pulse animation */
+.badge-dot {
+  width: 9px;
+  height: 9px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--green);
+  flex-shrink: 0;
+}
+
+.hero-name {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: clamp(3rem, 6.5vw, 5.5rem);
+  line-height: 1.05;
+  letter-spacing: -2px;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+
+.hero-role {
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: clamp(1.3rem, 2.8vw, 2.1rem);
+  line-height: 1.3;
+  color: var(--text-sub);
+  margin-bottom: 1.5rem;
+}
+
+.hero-tagline {
+  color: var(--text-sub);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  max-width: 480px;
+  margin-bottom: 2.2rem;
+  font-weight: 400;
+}
+
+.social-icon {
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid var(--border-hi);
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-sub);
+  text-decoration: none;
+  font-size: 1.05rem;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.social-icon:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-glow);
+}
+
+.hero-avatar {
+  width: 300px;
+  height: 300px;
+  border-radius: 160px;
+  background: linear-gradient(135deg, var(--surface), var(--surface2));
+  border: 1.5px solid var(--border-hi);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6.5rem;
+  margin: 0 auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.avatar-caption {
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 1rem;
+  letter-spacing: 0.04em;
+}
+
+
+/* ============================================================
+   8. ABOUT SECTION
+============================================================ */
+
+.stat-box {
+  text-align: center;
+  padding: 1.4rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: border-color 0.2s;
+}
+
+.stat-box:hover {
+  border-color: var(--border-hi);
+}
+
+.stat-num {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 2.2rem;
+  color: var(--accent);
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--text-sub);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+.info-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.88rem;
+  color: var(--text);
+  font-weight: 500;
+  transition: border-color 0.2s;
+}
+
+.info-pill i {
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
+.info-pill:hover {
+  border-color: var(--border-hi);
+}
+
+
+/* ============================================================
+   9. SKILLS SECTION
+============================================================ */
+
+.skill-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+
+.skill-card-title {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--white);
+}
+
+.skill-group {
+  margin-bottom: 1.4rem;
+}
+
+.skill-group:last-child {
+  margin-bottom: 0;
+}
+
+.skill-group-label {
+  font-family: var(--font-code);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.46rem 0.95rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  font-weight: 500;
+  margin: 0.2rem;
+  cursor: default;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.pill i {
+  color: var(--accent);
+  font-size: 0.92rem;
+}
+
+.pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-glow);
+}
+
+/* Skill level badges (kept for reference, currently commented out in HTML) */
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-code);
+  font-size: 0.65rem;
+  font-weight: 500;
+  padding: 0.18rem 0.6rem;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.level-badge.solid {
+  background: rgba(79, 158, 255, 0.1);
+  border: 1px solid rgba(79, 158, 255, 0.25);
+  color: var(--accent);
+}
+
+.level-badge.growing {
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  color: var(--green);
+}
+
+.level-badge.applied {
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  color: var(--accent2);
+}
+
+
+/* ============================================================
+   10. TOOLS SECTION
+============================================================ */
+.tool-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem 1rem;
+  transition: border-color 0.2s;
+  text-align: center;
+}
+
+.tool-chip:hover {
+  border-color: var(--border-hi);
+}
+
+.tool-chip i {
+  font-size: 1.8rem;
+  color: var(--accent);
+}
+
+.tool-chip span {
+  font-size: 0.78rem;
+  color: var(--text-sub);
+  font-weight: 500;
+}
+
+
+/* ============================================================
+   11. PROJECTS SECTION
+============================================================ */
+.proj-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.8rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s;
+}
+
+.proj-card:hover {
+  border-color: var(--border-hi);
+}
+
+.proj-num {
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: 2.8rem;
+  color: rgba(255, 255, 255, 0.04);
+  line-height: 1;
+  margin-bottom: -0.7rem;
+  letter-spacing: -1px;
+}
+
+.proj-title {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--white);
+  margin-bottom: 0.7rem;
+}
+
+.proj-desc {
+  color: var(--text-sub);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  flex: 1;
+  margin-bottom: 1.1rem;
+}
+
+.proj-tags {
+  margin-bottom: 1.2rem;
+}
+
+.tag {
+  display: inline-block;
+  background: rgba(79, 158, 255, 0.08);
+  border: 1px solid rgba(79, 158, 255, 0.22);
+  color: var(--accent);
+  font-size: 0.72rem;
+  padding: 0.2rem 0.58rem;
+  border-radius: 5px;
+  margin: 0.13rem;
+  font-family: var(--font-code);
+  font-weight: 500;
+}
+
+.proj-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: auto;
+}
+
+.btn-proj-primary {
+  font-family: var(--font-main);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: 7px;
+  text-decoration: none;
+  background: var(--accent);
+  color: #000;
+  border: 1.5px solid var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-proj-primary:hover {
+  background: transparent;
+  color: var(--accent);
+}
+
+.btn-proj-ghost {
+  font-family: var(--font-main);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.45rem 1rem;
+  border-radius: 7px;
+  text-decoration: none;
+  background: transparent;
+  color: var(--text-sub);
+  border: 1.5px solid var(--border-hi);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-proj-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+
+/* ============================================================
+   12. EXPERIENCE SECTION
+============================================================ */
+.exp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem 2rem 2rem 2.4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.exp-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--accent), var(--accent2));
+  border-radius: 0 2px 2px 0;
+}
+
+.exp-badge {
+  display: inline-block;
+  background: rgba(79, 158, 255, 0.1);
+  border: 1px solid rgba(79, 158, 255, 0.2);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-family: var(--font-code);
+  padding: 0.28rem 0.78rem;
+  border-radius: 5px;
+  margin-bottom: 0.9rem;
+  font-weight: 500;
+}
+
+.exp-title {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.exp-list {
+  list-style: none;
+  padding: 0;
+}
+
+.exp-list li {
+  padding: 0.38rem 0;
+  padding-left: 1.3rem;
+  color: var(--text-sub);
+  font-size: 0.97rem;
+  position: relative;
+  line-height: 1.65;
+}
+
+.exp-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   13. EDUCATION SECTION
+============================================================ */
+
+.edu-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  gap: 1.3rem;
+  align-items: flex-start;
+  transition: border-color 0.2s;
+}
+
+.edu-card:hover {
+  border-color: var(--border-hi);
+}
+
+.edu-icon {
+  width: 52px;
+  height: 52px;
+  background: rgba(79, 158, 255, 0.09);
+  border: 1px solid rgba(79, 158, 255, 0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.edu-degree {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--white);
+  margin-bottom: 0.25rem;
+}
+
+.edu-inst {
+  color: var(--text-sub);
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.edu-cgpa {
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  color: var(--accent3);
+  font-weight: 500;
+}
+
+.ach-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.8rem;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.ach-card:hover {
+  border-color: rgba(251, 191, 36, 0.28);
+}
+
+.ach-icon {
+  font-size: 1.9rem;
+  color: var(--accent3);
+  margin-bottom: 0.8rem;
+}
+
+.ach-title {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--white);
+  margin-bottom: 0.35rem;
+}
+
+.ach-sub {
+  color: var(--text-sub);
+  font-size: 0.87rem;
+}
+
+.cert-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.35rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  transition: border-color 0.2s;
+}
+
+.cert-card:hover {
+  border-color: rgba(167, 139, 250, 0.28);
+}
+
+.cert-icon {
+  width: 46px;
+  height: 46px;
+  background: rgba(79, 158, 255, 0.09);
+  border: 1px solid rgba(79, 158, 255, 0.2);
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+
+.cert-title {
+  color: var(--white);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.cert-sub {
+  color: var(--text-sub);
+  font-size: 0.82rem;
+  margin-top: 0.15rem;
+}
+
+
+/* ============================================================
+   14. CONTACT SECTION
+============================================================ */
+.contact-section {
+  background: var(--surface);
+}
+
+.con-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.con-row:last-of-type {
+  border-bottom: none;
+}
+
+.con-icon {
+  width: 42px;
+  height: 42px;
+  background: rgba(79, 158, 255, 0.08);
+  border: 1px solid rgba(79, 158, 255, 0.18);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.con-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 500;
+}
+
+.con-value {
+  font-size: 0.97rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.form-ctrl {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  color: var(--text);
+  padding: 0.88rem 1.05rem;
+  width: 100%;
+  font-family: var(--font-main);
+  font-size: 0.97rem;
+  outline: none;
+  resize: none;
+  transition: border-color 0.2s;
+}
+
+.form-ctrl::placeholder {
+  color: var(--muted);
+}
+
+.form-ctrl:focus {
+  border-color: var(--accent);
+}
+
+
+/* ============================================================
+   15. FOOTER
+============================================================ */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2.2rem 0;
+}
+
+.footer-name {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+footer p {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-family: var(--font-code);
+}
+
+.footer-copy {
+  font-size: 0.72rem;
+  margin-top: 0.3rem;
+}
+
+
+/* ============================================================
+   16. SCROLL-TO-TOP BUTTON
+============================================================ */
+#scrollTopBtn {
+  position: fixed;
+  bottom: 1.8rem;
+  right: 1.8rem;
+  width: 44px;
+  height: 44px;
+  background: var(--accent);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, background 0.2s;
+}
+
+#scrollTopBtn.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#scrollTopBtn:hover {
+  background: #6fafff;
+}
+
+
+/* ============================================================
+   17. FADE-IN
+   Elements are fully visible by default — no scroll-triggered
+   opacity/transform animation. The .fade-in and delay classes
+   are kept as no-ops so index.html needs no edits.
+============================================================ */
+.fade-in  { /* intentionally empty — elements always visible */ }
+.delay-1  { /* intentionally empty */ }
+.delay-2  { /* intentionally empty */ }
+.delay-3  { /* intentionally empty */ }
